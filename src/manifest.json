@@ -1,0 +1,30 @@
+{
+  "short_name": "Bookmarks PWA",
+  "name": "Notion Bookmarks PWA",
+  "icons": [
+    {
+      "src": "./icon_192.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "./icon_512.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ],
+  "start_url": "/",
+  "background_color": "#ffffff",
+  "display": "standalone",
+  "theme_color": "#ffffff",
+  "share_target":
+  {
+    "action": "/",
+    "params":
+    {
+      "title": "title",
+      "text": "text",
+      "url": "url"
+    }
+  }
+}

@@ -1,8 +1,14 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
+import NotionContext from "../notion";
 
-export const BookmarkInput = ({ onSaveClicked }) => {
+export const BookmarkInput = () => {
+  const { addItem } = useContext(NotionContext);
   const [url, setUrl] = useState("");
   const [description, setDescription] = useState("");
+
+  const addToBookmarks = (description, url) => {
+    addItem(description, url);
+  };
 
   return (
     <div className="container m-4">
@@ -26,7 +32,7 @@ export const BookmarkInput = ({ onSaveClicked }) => {
       />
       <button
         className="border-4 border-black mt-1 w-52"
-        onClick={() => onSaveClicked(description, url)}
+        onClick={() => addToBookmarks(description, url)}
       >
         Save
       </button>

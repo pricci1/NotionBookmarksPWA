@@ -1,7 +1,8 @@
-import { useState } from "react";
-import { getItems } from "../notion";
+import { useContext, useState } from "react";
+import NotionContext from "../notion";
 
 export const MyBookmarks = () => {
+  const { getItems } = useContext(NotionContext);
   const [bookmarkPages, setBookmarkPages] = useState([]);
 
   return (
@@ -18,7 +19,7 @@ export const MyBookmarks = () => {
       </button>
       <ul>
         {bookmarkPages?.map((bookmarkPage) => (
-          <li className="pb-3">
+          <li className="pb-3" key={bookmarkPage.id}>
             <p>{bookmarkPage.properties["Description"].title[0].plain_text}</p>
             <p>
               <a

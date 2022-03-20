@@ -1,18 +1,16 @@
-import { useState } from "react";
 import { BookmarkInput } from "./components/BookmarkInput";
 import { MyBookmarks } from "./components/MyBookmarks";
-import { addItem } from "./notion";
+import { NotionProvider } from "./notion";
+import { Settings } from "./components/Settings";
 
 export function App() {
-  const [bookmarks, setBookmarks] = useState([]);
-  const addToBookmarks = (description, url) => {
-    setBookmarks((old) => [...old, url]);
-    addItem(description, url);
-  };
   return (
     <div className="container">
-      <BookmarkInput onSaveClicked={addToBookmarks} />
-      <MyBookmarks />
+      <NotionProvider>
+        <Settings />
+        <BookmarkInput />
+        <MyBookmarks />
+      </NotionProvider>
     </div>
   );
 }

@@ -3,20 +3,29 @@ import { MyBookmarks } from "./components/MyBookmarks";
 import { NotionProvider } from "./notion";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { ReactQueryDevtools } from "react-query/devtools";
-import { Settings } from "./components/Settings";
+import Header from "./components/Header";
+
 const queryClient = new QueryClient();
 
 export function App() {
   return (
-    <div className="container">
-      <NotionProvider>
-        <QueryClientProvider client={queryClient}>
-          <Settings />
-          <BookmarkInput />
-          <MyBookmarks />
-          <ReactQueryDevtools />
-        </QueryClientProvider>
-      </NotionProvider>
-    </div>
+    <NotionProvider>
+      <QueryClientProvider client={queryClient}>
+        <div className="min-h-full">
+          <Header />
+          <main>
+            <div className="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
+              <div className="px-4 py-6 sm:px-0">
+                <div className="border-4 border-dashed border-gray-200 rounded-lg">
+                  <BookmarkInput />
+                  <MyBookmarks />
+                  <ReactQueryDevtools />
+                </div>
+              </div>
+            </div>
+          </main>
+        </div>
+      </QueryClientProvider>
+    </NotionProvider>
   );
 }

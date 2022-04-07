@@ -12,26 +12,37 @@ export const BookmarkInput = () => {
 
   return (
     <div className="container m-4">
-      <label htmlFor="description">Description</label>
-      <input
-        className="block border-2 border-black rounded-sm"
-        type="text"
-        name="description"
-        id="description"
-        value={description}
-        onChange={(e) => setDescription(e.target.value)}
-      />
-      <label htmlFor="url">URL</label>
-      <input
-        className="block border-2 border-black rounded-sm"
-        type="url"
-        name="url"
-        id="url"
-        value={url}
-        onChange={(e) => setUrl(e.target.value)}
-      />
+      <label
+        className="block text-sm font-medium text-gray-700"
+        htmlFor="description"
+      >
+        Description
+      </label>
+      <div className="mt-1 relative rounded-md shadow-lg">
+        <input
+          className="focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-1 pr-12 sm:text-sm border-gray-300 rounded-lg"
+          type="text"
+          name="description"
+          id="description"
+          value={description}
+          onChange={(e) => setDescription(e.target.value)}
+        />
+      </div>
+      <label className="mt-1 relative rounded-md shadow-lg" htmlFor="url">
+        URL
+      </label>
+      <div className="mt-1 relative rounded-md shadow-lg">
+        <input
+          className="focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-1 pr-12 sm:text-sm border-gray-300 rounded-lg"
+          type="url"
+          name="url"
+          id="url"
+          value={url}
+          onChange={(e) => setUrl(e.target.value)}
+        />
+      </div>
       <button
-        className="border-4 border-black mt-1 w-52"
+        className="mt-2 rounded-lg font-medium border border-solid cursor-pointer text-center text-xs py-1 px-2 text-white bg-green-400 border-green-400 hover:bg-green-600 hover:border-green-600"
         onClick={() => addToBookmarks(description, url)}
       >
         Save

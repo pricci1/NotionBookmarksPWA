@@ -2,7 +2,32 @@ import { Client } from "@notionhq/client";
 import React, { useEffect, useState } from "react";
 import useLocalStorage from "./hooks/useLocalStorage";
 
-const NotionContext = React.createContext({});
+export interface NotionList {
+  object: "list";
+  results: NotionPage[];
+  next_cursor?: any;
+  has_more: boolean;
+  type: "page";
+  page: any;
+}
+
+interface NotionPage {
+  id: string;
+  properties: {
+    URL: any;
+    Read: { checkbox: boolean };
+    Description: any;
+  };
+}
+
+interface NotionContextType {
+  addItem: (description, url) => Promise<any>;
+  getItems: () => Promise<any>;
+  setNotionToken: React.Dispatch<React.SetStateAction<string>> | undefined;
+  setDatabaseId: React.Dispatch<React.SetStateAction<string>>;
+}
+
+const NotionContext = React.createContext<NotionContextType>({} as any);
 
 export const NotionProvider = ({ children }) => {
   const [notionClient, setNotionClient] = useState(undefined);
@@ -73,7 +98,7 @@ async function addItem(
 
 async function getItems(notion: Client, databaseId: string) {
   try {
-    const response = await notion.databases.query({
+    const response = await notion?.databases.query({
       database_id: databaseId,
     });
     console.log(response);

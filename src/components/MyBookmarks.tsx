@@ -1,18 +1,29 @@
-import { useContext, useState } from "react";
-import NotionContext from "../notion";
+import { useContext } from "react";
+import { useQuery } from "react-query";
+import NotionContext, { NotionList } from "../notion";
+
+const useBookmarks = (queryOptions?: object) => {
+  const { getItems } = useContext(NotionContext);
+
+  return useQuery<NotionList>("bookmarks", getItems, {
+    staleTime: Infinity,
+    ...queryOptions,
+  });
+};
 
 export const MyBookmarks = () => {
-  const { getItems } = useContext(NotionContext);
-  const [bookmarkPages, setBookmarkPages] = useState([]);
+  const { data: bookmarksData, refetch: fetchBookmarks } = useBookmarks({
+    refetchOnMount: false,
+  });
+
+  const bookmarkPages = bookmarksData?.results;
 
   return (
     <div className="m-4">
       <button
         className="border-black border-2"
         onClick={() => {
-          getItems().then((items) => {
-            setBookmarkPages(items?.results);
-          });
+          fetchBookmarks();
         }}
       >
         GET

@@ -47,7 +47,7 @@ const SettingsMenu = ({ children }) => {
           </button>
         </div>
         <div
-          className="z-10 origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none"
+          className="z-10 origin-top-right absolute right-0 mt-2 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none"
           role="menu"
           hidden={showSettings}
         >

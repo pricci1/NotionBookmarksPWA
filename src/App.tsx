@@ -2,10 +2,28 @@ import { BookmarkInput } from "./components/BookmarkInput";
 import { MyBookmarks } from "./components/MyBookmarks";
 import { NotionProvider } from "./notion";
 import { QueryClient, QueryClientProvider } from "react-query";
+import { persistQueryClient } from "react-query/persistQueryClient-experimental";
+import { createWebStoragePersistor } from "react-query/createWebStoragePersistor-experimental";
 import { ReactQueryDevtools } from "react-query/devtools";
 import Header from "./components/Header";
 
-const queryClient = new QueryClient();
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      cacheTime: Infinity,
+    },
+  },
+});
+
+const localStoragePersistor = createWebStoragePersistor({
+  storage: window.localStorage,
+});
+
+persistQueryClient({
+  queryClient,
+
+  persistor: localStoragePersistor,
+});
 
 export function App() {
   return (
